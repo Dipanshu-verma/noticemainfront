@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const SignupForm = ({ onSignup }) => {
@@ -13,9 +14,9 @@ const SignupForm = ({ onSignup }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Add form submission logic
+    
     onSignup(formData);
   };
 

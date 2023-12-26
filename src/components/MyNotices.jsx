@@ -1,16 +1,20 @@
 import React from 'react';
 
-const MyNotices = ({ myNotices }) => {
+const NoticeList = ({ myNotices,setMyNotices}) => {
+
+    
   return (
     <div>
-      <h2>My Notices</h2>
+      <h2>Notices</h2>
       <ul>
-        {myNotices.map((notice) => (
+        {myNotices?.map((notice) => (
           <li key={notice._id}>
             <strong>{notice.title}</strong>
             <p>{notice.body}</p>
             <p>Category: {notice.category}</p>
             <p>Date: {new Date(notice.date).toLocaleDateString()}</p>
+            <button>edit</button>
+            <button>delete</button>
           </li>
         ))}
       </ul>
@@ -18,4 +22,4 @@ const MyNotices = ({ myNotices }) => {
   );
 };
 
-export default MyNotices;
+export default NoticeList;

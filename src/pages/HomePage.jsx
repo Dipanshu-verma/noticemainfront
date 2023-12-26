@@ -1,18 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import NoticeList from '../components/NoticeList';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const HomePage = ({ user, onLogout }) => {
+const HomePage = ({login}) => {
   const [notices, setNotices] = useState([]);
+  const navigate =  useNavigate();
+  const headers = {
+    'Content-Type': 'application/json',  
+    'authorization': JSON.parse(localStorage.getItem("jwt_token"))||null, 
+    
+  };
+   
 
   useEffect(() => {
-    // Fetch notices logic (use API calls or dummy data)
+    
+fatchNotices();
+    
   }, []);
+
+async function fatchNotices(){
+
+try{
+    const data =  await axios.get("https://notice-back-8mgu.onrender.com/notice", {headers});
+    
+setNotices(data.data)
+
+}catch(error){
+    console.log("something went wrong");
+}
+     
+}
 
   return (
     <div>
-      <h1>Welcome, {user.name}!</h1>
-      <button onClick={onLogout}>Logout</button>
-      <NoticeList notices={notices} />
+      <h1>Welcome</h1>
+      {login &&  <NoticeList myNotices={notices} />}
+    
     </div>
   );
 };

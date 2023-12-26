@@ -1,52 +1,57 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+ 
+import './App.css';
+import {Route, Link, Routes } from 'react-router-dom';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import MyNoticesPage from './pages/MyNoticesPage';
+import { useState } from 'react';
+ 
+function App() {
 
-const App = () => {
-  const [user, setUser] = useState(null);
+  
+const bool =  JSON.parse(localStorage.getItem("jwt_token")) ? true : false
+const [login,setLogin]  = useState(bool)
 
-  const handleSignup = async (formData) => {
-    // Add signup logic (use API calls or dummy data)
-  };
-
-  const handleLogin = async (formData) => {
-    // Add login logic (use API calls or dummy data)
-  };
-
-  const handleLogout = () => {
-    // Add logout logic
-    setUser(null);
-  };
-
+function handlelogout(){
+  localStorage.clear();
+  setLogin(false);
+}
   return (
-    <Router>
-      <Switch>
-        <Route path="/signup">
-          {user ? <Redirect to="/" /> : <SignupPage onSignup={handleSignup} />}
-        </Route>
-        <Route path="/login">
-          {user ? <Redirect to="/" /> : <LoginPage onLogin={handleLogin} />}
-        </Route>
-        <Route path="/" exact>
-          {user ? (
-            <HomePage user={user} onLogout={handleLogout} />
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-        <Route path="/my-notices">
-          {user ? (
-            <MyNoticesPage user={user} />
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+    <nav>
+    <ul>
+      <li>
+        <Link to="/home">Home</Link>
+      </li>
+{
+  !login? <div><li>
+        <Link to="/login">Login</Link>
+      </li>
+      <li>
+        <Link to="/signup">Signup</Link>
+      </li></div>: <Link onClick={handlelogout}>Logout</Link>
+}
+     
+
+      <li>
+        <Link to="/my-notices">my-notices</Link>
+      </li>
+
+    </ul>
+  </nav>
+   <Routes>
+
+        <Route path="/signup" element={<SignupPage/>} />
+        <Route path="/login" element={<LoginPage setLogin={setLogin} />} />
+
+        <Route path="/home" element={<HomePage login={login}/>} />
+        <Route path="/" element={<HomePage login={login}/>} />
+
+        <Route path="/my-notices" element={<MyNoticesPage/>} />
+        </Routes>
+      </div>
   );
-};
+}
 
 export default App;
