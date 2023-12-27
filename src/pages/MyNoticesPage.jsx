@@ -99,7 +99,7 @@ const MyNoticesPage = ({userdetail}) => {
     <div>
       <h1>My Notices</h1>
       <div>
-      <h2>Notices</h2>
+    
       <ul>
         {myNotices?.map((notice) => (
           <li key={notice._id}>

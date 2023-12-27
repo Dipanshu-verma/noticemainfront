@@ -34,11 +34,11 @@ const HomePage = ({ login ,userdetail}) => {
 
   return (
     <div>
-      <h1>Welcome to the notices home page </h1>
+      <h1>Welcome  </h1>
       {
         login &&
         <div>
-          <h2>Filter Notices by Category</h2>
+          <h2>Filter Notices</h2>
           <select value={selectedCategory} onChange={handleCategoryChange}>
             <option value="">All Categories</option>
             <option value="parking">Parking</option>
@@ -46,7 +46,7 @@ const HomePage = ({ login ,userdetail}) => {
             <option value="maintenance">Maintenance</option>
           </select>
 
-          <h2>Notices</h2>
+           
           <ul>
             {notices?.map((notice) => (
               <li key={notice._id}>
