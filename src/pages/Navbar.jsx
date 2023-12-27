@@ -14,7 +14,7 @@ const Navbar = ({handlelogout, login}) => {
       </li>
       <li>
         <Link to="/signup">Signup</Link>
-      </li></div>: <div><button onClick={handlelogout}>Logout</button> <Link to="/noticecreate" >Create a Notice</Link></div> 
+      </li></div>: <div><button onClick={handlelogout}>Logout</button> <Link to="/noticecreate">Create a Notice</Link></div> 
 }
      
       <li>

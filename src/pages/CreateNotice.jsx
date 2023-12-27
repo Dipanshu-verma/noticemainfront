@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const CreateNotice = () => {
+const CreateNotice = ({userdetail}) => {
   const [noticeData, setNoticeData] = useState({
     title: '',
     body: '',
-    category: 'parking', // Default category
+    category: 'parking',  
   });
   const navigate =useNavigate();
   const headers = {
     'Content-Type': 'application/json',  
-    'authorization': JSON.parse(localStorage.getItem("jwt_token"))||null, 
+    'authorization': userdetail.token, 
     
   };
    

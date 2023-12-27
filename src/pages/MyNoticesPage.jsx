@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
  
 import axios from 'axios';
 
-const headers = {
-    'Content-Type': 'application/json',  
-    'authorization': JSON.parse(localStorage.getItem("jwt_token"))||null, 
-    
-  };
 
-const MyNoticesPage = () => {
+
+const MyNoticesPage = ({userdetail}) => {
   const [myNotices, setMyNotices] = useState([]);
   const [editMode, setEditMode] = useState(null);
   const [editedNotice, setEditedNotice] = useState({ title: '', body: '', category: '' });
-
+  const headers = {
+    'Content-Type': 'application/json',  
+    'authorization': userdetail.token||null, 
+    
+  };
   useEffect(() => {
    
     fatchNotices();
   }, []);
 
   async function fatchNotices(){
-    const user = JSON.parse(localStorage.getItem("user"))||null;
+    const user = userdetail.user;
  
     try{
         const data =  await axios.get(`https://notice-back-8mgu.onrender.com/notice/${user._id}`,{headers});

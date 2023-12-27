@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const HomePage = ({ login }) => {
+const HomePage = ({ login ,userdetail}) => {
   const [notices, setNotices] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(''); 
   const navigate = useNavigate();
 
   const headers = {
     'Content-Type': 'application/json',
-    'authorization': JSON.parse(localStorage.getItem("jwt_token")) || null,
+    'authorization': userdetail.token,
   };
 
   useEffect(() => {

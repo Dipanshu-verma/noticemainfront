@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const LoginPage = ({setLogin}) => {
+const LoginPage = ({setLogin,userdetail, setUserDetail}) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
       email: '',
@@ -14,7 +14,9 @@ const LoginPage = ({setLogin}) => {
             const user   = await axios.post("https://notice-back-8mgu.onrender.com/auth/login",formData);
            
             localStorage.setItem("jwt_token", JSON.stringify(user.data.token))
+
             localStorage.setItem("user", JSON.stringify(user.data.user))
+            setUserDetail({user:user.data.user,token:user.data.token})
             navigate("/")
 
             setLogin(true);
