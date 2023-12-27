@@ -24,6 +24,8 @@ const[userdetail, setUserDetail] =useState({
 const navigate = useNavigate();
 function handlelogout(){
   localStorage.clear();
+  setUserDetail({token:null,user:null})
+
   navigate("/")
   setLogin(false);
 }
