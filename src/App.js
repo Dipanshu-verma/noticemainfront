@@ -6,6 +6,8 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import MyNoticesPage from './pages/MyNoticesPage';
 import { useState } from 'react';
+import Navbar from './pages/Navbar';
+import CreateNotice from './pages/CreateNotice';
  
 function App() {
 
@@ -19,27 +21,8 @@ function handlelogout(){
 }
   return (
     <div>
-    <nav>
-    <ul>
-      <li>
-        <Link to="/home">Home</Link>
-      </li>
-{
-  !login? <div><li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/signup">Signup</Link>
-      </li></div>: <Link onClick={handlelogout}>Logout</Link>
-}
-     
-
-      <li>
-        <Link to="/my-notices">my-notices</Link>
-      </li>
-
-    </ul>
-  </nav>
+  
+<Navbar handlelogout={handlelogout} login={login} />
    <Routes>
 
         <Route path="/signup" element={<SignupPage/>} />
@@ -47,6 +30,7 @@ function handlelogout(){
 
         <Route path="/home" element={<HomePage login={login}/>} />
         <Route path="/" element={<HomePage login={login}/>} />
+        <Route path="/noticecreate" element={<CreateNotice/>} />
 
         <Route path="/my-notices" element={<MyNoticesPage/>} />
         </Routes>
